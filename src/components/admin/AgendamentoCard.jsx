@@ -10,6 +10,8 @@ export function AgendamentoCard({ ag, onAcao, compacto = false }) {
   const fim = fromMin(toMin(ag.hora) + ag.duracao)
   const bloqueio = ag.status === 'bloqueio'
   const tel = (ag.clienteTelefone || '').replace(/\D/g, '')
+  const podeDesfazer = (ag.status === 'concluido' || ag.status === 'cancelado') && !compacto
+  const temAcoes = bloqueio || ag.status === 'agendado'
   const borda = {
     agendado: 'border-l-sky-400',
     concluido: 'border-l-emerald-400',
@@ -19,7 +21,7 @@ export function AgendamentoCard({ ag, onAcao, compacto = false }) {
   }[ag.status]
 
   return (
-    <div className={`card border-l-4 ${borda} p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3 ${ag.status === 'cancelado' ? 'opacity-60' : ''} ${bloqueio ? 'bg-[repeating-linear-gradient(135deg,transparent,transparent_8px,rgba(255,255,255,0.02)_8px,rgba(255,255,255,0.02)_16px)]' : ''}`}>
+    <div className={`relative card border-l-4 ${borda} p-3 sm:p-4 ${podeDesfazer ? 'pr-12 sm:pr-4' : ''} flex flex-col sm:flex-row sm:items-center gap-3 ${ag.status === 'cancelado' ? 'opacity-60' : ''} ${bloqueio ? 'bg-[repeating-linear-gradient(135deg,transparent,transparent_8px,rgba(255,255,255,0.02)_8px,rgba(255,255,255,0.02)_16px)]' : ''}`}>
       <div className="flex items-start gap-3 flex-1 min-w-0">
         <div className="w-14 shrink-0 tabular-nums">
           <div className="text-cream-50 font-semibold">{ag.diaInteiro ? 'Dia' : ag.hora}</div>
@@ -40,7 +42,7 @@ export function AgendamentoCard({ ag, onAcao, compacto = false }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-1 sm:justify-end -ml-1 sm:ml-0 pl-14 sm:pl-0">
+      <div className={`${temAcoes ? 'flex' : 'hidden'} items-center gap-1 sm:justify-end -ml-1 sm:ml-0 pl-14 sm:pl-0`}>
         {bloqueio && (
           <Botao variante="fantasma" onClick={() => onAcao('liberar', ag)} className="!px-2.5 !py-1.5"><Unlock size={16} /> Liberar</Botao>
         )}
@@ -57,10 +59,13 @@ export function AgendamentoCard({ ag, onAcao, compacto = false }) {
             <IconeAcao titulo="Cancelar" cor="text-red-400" onClick={() => onAcao('cancelar', ag)}><Trash2 size={17} /></IconeAcao>
           </>
         )}
-        {(ag.status === 'concluido' || ag.status === 'cancelado') && !compacto && (
-          <IconeAcao titulo="Desfazer (voltar para agendado)" cor="text-cream-500" onClick={() => onAcao('reabrir', ag)}><RotateCcw size={16} /></IconeAcao>
-        )}
       </div>
+      {/* "Desfazer" fica no canto, sem ocupar uma linha inteira no celular */}
+      {podeDesfazer && (
+        <div className="absolute top-2 right-2 sm:static">
+          <IconeAcao titulo="Desfazer (voltar para agendado)" cor="text-cream-500" onClick={() => onAcao('reabrir', ag)}><RotateCcw size={16} /></IconeAcao>
+        </div>
+      )}
     </div>
   )
 }

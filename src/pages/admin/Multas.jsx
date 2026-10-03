@@ -77,16 +77,16 @@ export default function Multas() {
                     </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 justify-between sm:justify-end pl-12 sm:pl-0">
-                  <span className="text-lg font-semibold text-cream-50 tabular-nums sm:mr-3">{brl(m.valor)}</span>
+                <div className="flex items-center gap-2 justify-between sm:justify-end sm:pl-0">
+                  <span className="text-lg font-semibold text-cream-50 tabular-nums whitespace-nowrap sm:mr-3">{brl(m.valor)}</span>
                   {m.status === 'aberta' && (
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 shrink-0 [&_button]:whitespace-nowrap">
                       {tel && (
                         <a href={`https://wa.me/55${tel}?text=${msgCobranca(m)}`} target="_blank" rel="noreferrer" title="Cobrar no WhatsApp"
                           className="p-2 rounded-lg text-[#25D366] hover:bg-ink-700"><WhatsApp size={18} /></a>
                       )}
                       <Botao variante="fantasma" className="!px-2.5" onClick={() => setConfirmar({ tipo: 'perdoar', m })}>Perdoar</Botao>
-                      <Botao variante="ok" className="!px-2.5" onClick={() => setConfirmar({ tipo: 'pagar', m })}>Marcar paga</Botao>
+                      <Botao variante="ok" className="!px-2.5" onClick={() => setConfirmar({ tipo: 'pagar', m })}><span className="sm:hidden">Pago</span><span className="hidden sm:inline">Marcar paga</span></Botao>
                     </div>
                   )}
                 </div>

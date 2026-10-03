@@ -10,7 +10,7 @@ const MIMOS = [
 
 export default function Sobre() {
   return (
-    <section id="sobre" className="py-24 md:py-32 bg-ink-900 grain">
+    <section id="sobre" className="py-24 md:py-32 bg-ink-900 grain overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-14 md:gap-16 items-center">
         <div className="relative">
           <div className="absolute -inset-3 border border-brass-500/30 translate-x-4 translate-y-4" aria-hidden="true" />

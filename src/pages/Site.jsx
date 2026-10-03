@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { X } from 'lucide-react'
 import Navbar from '../components/site/Navbar'
 import Hero from '../components/site/Hero'
 import Sobre from '../components/site/Sobre'
@@ -17,6 +18,13 @@ export default function Site() {
   const [conta, setConta] = useState(false)
   const [multa, setMulta] = useState(null)
   const [servicoInicial, setServicoInicial] = useState(null)
+  const [seloTeste, setSeloTeste] = useState(() => {
+    try { return sessionStorage.getItem('selo-teste') !== 'fechado' } catch { return true }
+  })
+  const fecharSelo = () => {
+    setSeloTeste(false)
+    try { sessionStorage.setItem('selo-teste', 'fechado') } catch { /* sem storage */ }
+  }
 
   const escolherServico = (id) => {
     setServicoInicial({ id, t: Date.now() })
@@ -48,9 +56,17 @@ export default function Site() {
       </a>
 
       {/* Selo do protótipo: deixa claro para quem testa que os dados são fictícios */}
-      <div className="fixed bottom-5 left-4 z-40 max-w-[60vw] text-[11px] leading-tight bg-ink-950/90 backdrop-blur border border-brass-500/40 text-cream-300 px-3 py-2 rounded-md shadow-xl">
-        <span className="text-brass-400 font-semibold">Versão de teste</span> · dados e login fictícios
-      </div>
+      {seloTeste && (
+        <div className="fixed bottom-5 left-4 z-40 flex items-center gap-2 text-[11px] leading-tight bg-ink-950/90 backdrop-blur border border-brass-500/40 text-cream-300 pl-3 pr-1 py-1 rounded-md shadow-xl">
+          <span>
+            <span className="text-brass-400 font-semibold">Versão de teste</span>
+            <span className="hidden sm:inline"> · dados e login fictícios</span>
+          </span>
+          <button onClick={fecharSelo} className="p-1.5 text-cream-500 hover:text-cream-50 cursor-pointer" aria-label="Fechar aviso">
+            <X size={14} />
+          </button>
+        </div>
+      )}
 
       <LoginModal aberto={login} onFechar={() => setLogin(false)} />
       <MinhaContaModal aberto={conta} onFechar={() => setConta(false)} onPagarMulta={setMulta} />
