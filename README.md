@@ -8,7 +8,7 @@ e ficam salvos no navegador (localStorage). Nada vai para servidor.
 ```
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # gera /dist para deploy (Netlify: _redirects já incluso)
+npm run build      # gera /dist (deploy automático na Vercel a cada push na main)
 ```
 
 - Site: `/` · Painel: `/admin`
