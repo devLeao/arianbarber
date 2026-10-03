@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-label: "Oswald", "Arial Narrow", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Paleta retrô: carvão, creme e latão */
+  --color-ink-950: #0b0a08;
+  --color-ink-900: #0e0c0a;
+  --color-ink-850: #13110e;
+  --color-ink-800: #17140f;
+  --color-ink-700: #211d17;
+  --color-ink-600: #2c2720;
+  --color-ink-500: #3d362c;
+
+  --color-cream-50: #f7f1e6;
+  --color-cream-100: #efe6d6;
+  --color-cream-300: #cfc3ad;
+  --color-cream-500: #9d927f;
+  --color-cream-700: #6f665a;
+
+  --color-brass-300: #e5c66e;
+  --color-brass-400: #d4b04a;
+  --color-brass-500: #c9a227;
+  --color-brass-600: #a8861c;
+  --color-brass-700: #7d6415;
+
+  --color-wine-500: #9b2c2c;
+  --color-wine-600: #7a1f1f;
+
+  --animate-fade-up: fade-up 0.7s ease-out both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+.font-display { font-variant-numeric: lining-nums; }
+body {
+  @apply bg-ink-900 text-cream-100 font-sans antialiased;
+}
+
+/* Textura de papel/grão sutil para o visual retrô */
+.grain {
+  position: relative;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 font-label uppercase tracking-[0.15em] text-sm px-6 py-3 rounded-sm transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer;
+}
+@utility btn-brass {
+  @apply btn bg-brass-500 text-ink-950 hover:bg-brass-400;
+}
+@utility btn-ghost {
+  @apply btn border border-cream-100/30 text-cream-100 hover:border-brass-500 hover:text-brass-400;
+}
+
+@utility input {
+  @apply w-full bg-ink-900 border border-ink-500 text-cream-50 px-3 py-2.5 rounded-md outline-none focus:border-brass-500 placeholder:text-cream-700 transition-colors;
+}
+@utility label {
+  @apply block text-xs font-medium text-cream-500 mb-1.5;
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #3d362c; border-radius: 3px; }
+
+/* Painel admin: cartão padrão */
+@utility card {
+  @apply bg-ink-800 border border-ink-600 rounded-xl;
+}
