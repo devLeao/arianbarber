@@ -16,7 +16,7 @@ export const CONFIG_PADRAO = {
   antecedenciaCancelHoras: 2,
   multaPct: 50,
   diasAgendaAberta: 21,
-  whatsapp: '5531999999999',
+  whatsapp: '5531973274723',
   instagram: 'arianbarber',
   endereco: 'Rua Exemplo, 123 - Centro',
   cidade: 'Belo Horizonte - MG',
@@ -204,7 +204,7 @@ export function gerarSeed() {
   agendamentos.sort((a, b) => (a.data + a.hora).localeCompare(b.data + b.hora))
 
   return {
-    versao: 2,
+    versao: 3,
     config,
     servicos: SERVICOS,
     produtos: PRODUTOS,

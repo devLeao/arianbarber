@@ -37,6 +37,16 @@
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+/* Celular: a página nunca arrasta para os lados. `clip` (e não `hidden`)
+   para não quebrar o header fixo/sticky. */
+html, body { overflow-x: clip; max-width: 100%; }
+
+/* iPhone dá zoom ao focar campos com fonte < 16px, e o zoom faz a página
+   "escorregar" para os lados. Garante 16px em todo campo no celular. */
+@media (max-width: 767px) {
+  input, select, textarea { font-size: 16px !important; }
+}
 .font-display { font-variant-numeric: lining-nums; }
 body {
   @apply bg-ink-900 text-cream-100 font-sans antialiased;

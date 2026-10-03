@@ -111,9 +111,14 @@ export function PagarMultaModal({ pendencias, onFechar }) {
             <QRCodeSVG value={codigo} size={200} level="M" />
           </div>
           <p className="text-xs text-cream-500 mb-2">Abra o app do seu banco, escolha Pix → Ler QR Code, ou use o copia e cola:</p>
-          <div className="flex gap-2 mb-5">
-            <input readOnly value={codigo} className="input !text-xs font-mono" onFocus={(e) => e.target.select()} />
-            <button onClick={copiar} className="btn-brass !px-3 !py-2 shrink-0" title="Copiar">{copiado ? <Check size={16} /> : <Copy size={16} />}</button>
+          {/* Texto (e não <input>) para o iPhone não dar zoom ao tocar */}
+          <div className="flex gap-2 mb-5 min-w-0">
+            <div className="flex-1 min-w-0 bg-ink-900 border border-ink-500 rounded-md px-3 py-2.5 text-xs font-mono text-cream-300 truncate select-all text-left">
+              {codigo}
+            </div>
+            <button onClick={copiar} className="btn-brass !px-3 !py-2 shrink-0 !text-xs !tracking-wider" title="Copiar">
+              {copiado ? <><Check size={16} /> Copiado</> : <><Copy size={16} /> Copiar</>}
+            </button>
           </div>
           <div className="flex items-center justify-center gap-2 text-sm text-cream-300 mb-5">
             <Loader2 size={16} className="animate-spin text-brass-400" /> Aguardando pagamento...

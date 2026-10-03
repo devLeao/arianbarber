@@ -13,6 +13,7 @@ npm run build      # gera /dist para deploy (Netlify: _redirects já incluso)
 
 - Site: `/` · Painel: `/admin`
 - Login simulado: botão **Entrar** → escolha "Cliente Demo", "Rodrigo Faltoso" (tem multa) ou "Arian (administrador)".
+- WhatsApp: (31) 97327-4723 (config padrão em src/data/seed.js).
 - Para recriar os dados de exemplo: Painel → Configurações → Resetar dados de exemplo.
 
 ## Estrutura

@@ -14,7 +14,7 @@ const StoreContext = createContext(null)
 function carregar() {
   try {
     const salvo = JSON.parse(localStorage.getItem(CHAVE))
-    if (salvo?.versao === 2) return salvo
+    if (salvo?.versao === 3) return salvo
   } catch {
     /* sem storage disponível: usa seed */
   }
